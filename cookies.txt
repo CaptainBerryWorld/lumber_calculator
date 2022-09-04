@@ -1,0 +1,5 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+.success.qualtrics.com	TRUE	/	FALSE	1999999999	__cf_bm	d9SU8_bqyRkmWZ4KkRd89tcOjcMmXRzvBXZnYUTNv5c-1658392030-0-ATl3ACwx52dDIX89M8/F8Vbbm3toDeZmLqVIV4dAx0kCcxdIPrtZ7rzRHaeX9OquTIW6N75nWj245sIsOocepGs=
+success.qualtrics.com	TRUE	/	FALSE	1999999999	SameSite	None
+
