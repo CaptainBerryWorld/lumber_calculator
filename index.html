@@ -142,9 +142,11 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
     </div> -->
     
     <div class="SampleSection" style="padding: 5px 12px 5px 0; margin: -7px 15px;">
-        <label for="treeRadius">Tree Radius (in):</label><br />
-        <input id="treeRadius" style="padding: 0 0; margin: 0 0; padding: 5px;" name="treeRadius" type="text" placeholder="00" />
+        <label for="DBH">Diameter at Breast Height (DBH):</label><br />
+        <input id="DBH" style="padding: 0 0; margin: 0 0; padding: 5px;" name="DBH" type="text" placeholder="00" />
         <br>
+        <label for="price">Unit price GHC:</label><br />
+        <input id="price" style="padding: 0 0; margin: 0 0; padding: 5px;" name="price" type="text" placeholder="00" />
         <br>
         <!-- <div class="btn btn-primary" onclick="calc">calculate</div>  -->
     </div>
@@ -169,7 +171,7 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
     </div> -->
 
     <div class="SampleSection SampleBox" style="padding: 30px 12px 5px 12px; margin: 0px 5px;">
-        <label for="cost">Cost (GHS):</label>
+        <label for="cost">Value (GHS):</label>
         <br />
         <input id="cost" name="cost" readonly="readonly" type="text" disabled placeholder="00"/>
     </div>
@@ -299,23 +301,25 @@ $(document).bind('DOMSubtreeModified', function () {
 <script>
     $(function () {
 
-        $treeRadiusInput = $("#treeRadius");
+        $DBHInput = $("#DBH");
         
+        $price = $("#price");
+
         $pricePerBoard = $("#pricePerBoard");
 
         $cost = $("#cost");
 
         function calc() {
-            if ($treeRadiusInput.val() !== ''){
+            if ($DBHInput.val() !== ''){
               
-                if($.isNumeric($treeRadiusInput.val())){
+                if($.isNumeric($DBHInput.val())){
 
-                    if ($.isNumeric($treeRadiusInput.val())) {
-                        $averageVolumePerHectar = (0.0004634)*(Math.pow(($treeRadiusInput.val() / 2.54), 2.201));
+                    if ($.isNumeric($DBHInput.val())) {
+                        $averageVolumePerHectar = (0.0004634)*(Math.pow(($DBHInput.val() ), 2.201));
                         $averagePlankVolume = (300 * 30 * 5);
-                        $answer = ($averageVolumePerHectar/$averagePlankVolume) * 46.5;
+                        $answer = ($averageVolumePerHectar/$averagePlankVolume) * 46.5 * $price.val();
 
-                        $("#cost").val($answer);
+                        $("#cost").val($averageVolumePerHectar * $price.val());
                     }
                 }
             }else{
@@ -325,7 +329,8 @@ $(document).bind('DOMSubtreeModified', function () {
         
         
 
-        $treeRadiusInput.on('input', calc)
+        $DBHInput.on('input', calc)
+        $price.on('input', calc)
 
         // $pricePerBoard.on('input', function () {
         //     if ($(this).val() == "") {
